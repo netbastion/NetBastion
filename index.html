@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Net Bastion 💎</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 25px;
+      border-radius: 25px;
+      width: 350px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.3);
+      text-align: center;
+      position: relative;
+    }
+    h2 {
+      color: #fff;
+      font-size: 26px;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.9);
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+      color: #fff;
+      text-align: left;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 15px;
+      background: rgba(255,255,255,0.9);
+      transition: 0.3s;
+    }
+    select:focus, input:focus {
+      box-shadow: 0 0 10px #00f;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(255,65,108,0.6);
+    }
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+      box-shadow: 0 0 25px rgba(255,65,108,0.8);
+    }
+    .success {
+      text-align: center;
+      color: #000;
+      margin-top: 15px;
+      font-size: 24px;
+      font-weight: 900;
+      display: none;
+    }
+    .support-btn {
+      background: #f0c419;
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+    .support-btn:hover {
+      background: #ffd93d;
+    }
+    .support-info {
+      display: none;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .support-info a {
+      display: block;
+      margin: 5px 0;
+      color: #007bff;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .support-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Support Button -->
+    <button class="support-btn" id="supportBtn">Support</button>
+    <div class="support-info" id="supportInfo">
+      <a href="https://wa.me/01742207668" target="_blank">WhatsApp📞: +8801742207668</a>
+      <a href="https://t.me/NetBastion" target="_blank">Telegram: @NetBastion</a>
+    </div>
+
+    <h2>Net Bastion 💎</h2>
+
+    <form id="orderForm">
+      <label for="package">Select Package</label>
+      <select id="package" name="PackageS" required>
+        <option value="">-- Select Package --</option>
+        <option value="25 Diamond - 25 Tk">25 Diamond 💎 - 25 Tk</option>
+        <option value="50 Diamond - 40 Tk">50 Diamond 💎 - 40 Tk</option>
+        <option value="100 Diamond - 74 Tk">100 Diamond 💎 - 74 Tk</option>
+        <option value="115 Diamond - 80 Tk">115 Diamond 💎 - 80 Tk</option>
+        <option value="Weekly - 160 Tk">Weekly 💎 - 160 Tk</option>
+        <option value="Monthly - 760 Tk">Monthly 💎 - 760 Tk</option>
+      </select>
+
+      <label for="payment">Payment Method</label>
+      <select id="payment" name="PayMethod" required>
+        <option value="">-- Select Payment Method --</option>
+        <option value="Bkash: 01744248549">Bkash: 01744248549</option>
+        <option value="Nagad: 01305043259">Nagad: 01305043259</option>
+        <option value="Binance: 823186072">Binance: 823186072</option>
+      </select>
+
+      <label for="txn">Transaction ID</label>
+      <input type="text" id="txn" name="TxnID" placeholder="Enter Transaction ID" required>
+
+      <label for="player">Player ID</label>
+      <input type="text" id="player" name="playerID" placeholder="Enter Player ID" required>
+
+      <button type="submit">Submit Order</button>
+      <p class="success" id="successMsg">✅ Order Submitted Successfully!</p>
+    </form>
+  </div>
+
+  <script>
+    const supportBtn = document.getElementById("supportBtn");
+    const supportInfo = document.getElementById("supportInfo");
+    const successMsg = document.getElementById("successMsg");
+    let lastSubmitTime = 0;
+
+    supportBtn.addEventListener("click", () => {
+      supportInfo.style.display = supportInfo.style.display === "block" ? "none" : "block";
+    });
+
+    function formatBangladeshTime(date) {
+      let day = String(date.getDate()).padStart(2,'0');
+      let month = String(date.getMonth()+1).padStart(2,'0');
+      let year = date.getFullYear();
+      let hours = date.getHours();
+      let minutes = String(date.getMinutes()).padStart(2,'0');
+      let seconds = String(date.getSeconds()).padStart(2,'0');
+      let ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 হলে 12 বানিয়ে দেবে
+      return `${day}/${month}/${year} ${hours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    document.getElementById("orderForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let now = new Date();
+      if(now.getTime() - lastSubmitTime < 60000){
+        alert("⏳ Please wait 1 minute before placing another order.");
+        return;
+      }
+      lastSubmitTime = now.getTime();
+
+      // SheetDB এ field names ঠিক করে data পাঠানো
+      const data = {
+        data: [
+          {
+            PackageS: document.getElementById("package").value,
+            PayMethod: document.getElementById("payment").value,
+            TxnID: document.getElementById("txn").value,
+            playerID: document.getElementById("player").value,
+            TimeDate: formatBangladeshTime(now)
+          }
+        ]
+      };
+
+      const sheetAPI = "https://sheetdb.io/api/v1/7b50dran2uztl";
+
+      fetch(sheetAPI, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => {
+        successMsg.style.display = "block";
+        setTimeout(()=> successMsg.style.display="none",60000);
+        document.getElementById("orderForm").reset();
+      })
+      .catch(err => alert("Error submitting order: " + err));
+    });
+  </script>
+</body>
+</html>
